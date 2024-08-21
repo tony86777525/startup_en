@@ -49,8 +49,16 @@ Route::get('/news', function () {
     return view('user.news');
 });
 
+Route::get('/NewsContent', function () {
+    return view('user.news-content');
+});
+
 Route::get('/story', function () {
     return view('user.story');
+});
+
+Route::get('/StoryContent', function () {
+    return view('user.story-content');
 });
 
 //Route::group([
