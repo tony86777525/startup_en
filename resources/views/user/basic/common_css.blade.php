@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="http://127.0.0.1:8000/assets/css/index.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/assets/css/gotop.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/assets/css/Style.css?v=20230428">
+<link rel="stylesheet" href="/assets/css/index.css">
+<link rel="stylesheet" href="/assets/css/gotop.css">
+<link rel="stylesheet" href="/assets/css/Style.css?v=20230428">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style type="text/css">
     #st-1 {
@@ -4595,26 +4594,6 @@
 
     #st-cmp-v2 .st-cmp-app .st-cmp-vendor-selection-card .st-cmp-body .st-cmp-section {
         margin-bottom: 10px;
-    }
-</style>
-
-<style>
-    .dropdown-submenu {
-        position: relative;
-    }
-
-    .dropdown-submenu > a:after {
-        content: "\f0da";
-        float: right;
-        border: none;
-        font-family: 'FontAwesome';
-    }
-
-    .dropdown-submenu > .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: 0px;
-        margin-left: 5px;
     }
 </style>
 <link rel="stylesheet" property="stylesheet" href="/assets/css/framework.extras-min.css">

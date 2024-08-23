@@ -13,53 +13,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([
+//    'namespace' => 'App\Http\Controllers\User',
+//    'as' => 'user.',
+], function () {
+
+});
 Route::get('/', function () {
     return view('user.index');
-});
+})->name('user.index');
 
 Route::get('/permit', function () {
     return view('user.permit');
-});
+})->name('user.permit');
 
 Route::get('/incorporation', function () {
     return view('user.incorporation');
-});
+})->name('user.incorporation');
 
 Route::get('/incentive', function () {
     return view('user.incentive');
-});
+})->name('user.incentive');
 
 Route::get('/ia', function () {
     return view('user.ia');
-});
+})->name('user.ia');
 
 Route::get('/smt', function () {
     return view('user.smt');
-});
+})->name('user.smt');
 
 Route::get('/cc', function () {
     return view('user.cc');
-});
+})->name('user.cc');
 
 Route::get('/innovation', function () {
     return view('user.innovation');
-});
+})->name('user.innovation');
 
-Route::get('/news', function () {
-    return view('user.news');
-});
+Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('user.news');
+Route::get('/NewsContent/{news_id}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('user.news-content');
 
-Route::get('/NewsContent', function () {
-    return view('user.news-content');
-});
-
-Route::get('/story', function () {
-    return view('user.story');
-});
-
-Route::get('/StoryContent', function () {
-    return view('user.story-content');
-});
+Route::get('/story', [\App\Http\Controllers\StoryController::class, 'index'])->name('user.story');
+Route::get('/StoryContent/{story_id}', [\App\Http\Controllers\StoryController::class, 'detail'])->name('user.story-content');
 
 //Route::group([
 ////    'namespace' => 'App\Http\Controllers\User',
