@@ -72,6 +72,31 @@ class News extends Model
         'enabled',
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+//        $d = new \DateTime();
+//        $d->setTime(0,0, 0, strtotime($value));
+//        return $d->format('Y-m-d H:i:s');
+        $week = array(
+            "0" => "星期日",
+            "1" => "星期一",
+            "2" => "星期二",
+            "3" => "星期三",
+            "4" => "星期四",
+            "5" => "星期五",
+            "6" => "星期六"
+        );
+
+        $w = $week[date('w', strtotime($value))];
+
+        return date("Y年m月d日$w H:i", strtotime($value));
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->enabled === 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>';
+    }
+
     public function getImageAttribute()
     {
         return '/uploads/66c6096a6e189730691728.jpg';

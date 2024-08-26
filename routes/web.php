@@ -51,11 +51,11 @@ Route::get('/innovation', function () {
     return view('user.innovation');
 })->name('user.innovation');
 
-Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('user.news');
-Route::get('/NewsContent/{news_id}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('user.news-content');
+Route::get('/news', [\App\Http\Controllers\User\NewsController::class, 'index'])->name('user.news');
+Route::get('/NewsContent/{news_id}', [\App\Http\Controllers\User\NewsController::class, 'detail'])->name('user.news-content');
 
-Route::get('/story', [\App\Http\Controllers\StoryController::class, 'index'])->name('user.story');
-Route::get('/StoryContent/{story_id}', [\App\Http\Controllers\StoryController::class, 'detail'])->name('user.story-content');
+Route::get('/story', [\App\Http\Controllers\User\StoryController::class, 'index'])->name('user.story');
+Route::get('/StoryContent/{story_id}', [\App\Http\Controllers\User\StoryController::class, 'detail'])->name('user.story-content');
 
 //Route::group([
 ////    'namespace' => 'App\Http\Controllers\User',
