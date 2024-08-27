@@ -82,7 +82,7 @@ class NewsController extends AdminController
         $form->text('title', __('標題'));
         $form->text('art_date', __('發佈日期'));
         $form->text('tag', __('標籤'));
-        $form->text('content', __('內容'));
+        $form->froalaEditor('content', __('內容'));
         $form->switch('enabled', '')->states(self::ENABLED_SWITCH);
 
 //        $form->email('email', __('E-mail'));

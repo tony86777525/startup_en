@@ -14,4 +14,6 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('news', \App\Admin\Controllers\User\NewsController::class);
     $router->resource('stories', \App\Admin\Controllers\User\StoryController::class);
+    $router->post('froala-editor/upload','User\Api\FroalaEditorUploadController@uploadImage');
+
 });
