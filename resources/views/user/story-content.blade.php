@@ -15,7 +15,7 @@
 @endPush
 
 @push('page_css')
-    <link rel="stylesheet" href="{{ url('assets/css/newscontent.css') }}">
+@vite(['resources/assets/sass/user/newscontent.scss'])
 @endPush
 
 @section('main')
