@@ -11,18 +11,21 @@ class FroalaEditorUploadController extends Controller
 {
     public function uploadImage(Request $request)
     {
-        $image = request()->file('file');
+        $file = $request->file('file');
 
-        //保存到当前默认disk
-        $path = $image->store('images');
+        $uniqueId = $file->store('temp', 'admin');
 
-        //保存到本地或者选定特定的disk
-        $url = Storage::disk('admin')->put('images',$image);
-        $url = Storage::disk('admin')->url($url);
+        $hash = sha1($uniqueId);
+        $path = substr($hash, 0, 3) . '/' . substr($hash, 3, 3) . '/' . substr($hash, 6, 3);
 
-        $data = ['link' => $url];
+        $filePath = $path . '/' . $hash . '.' . $file->guessExtension();;
+
+        Storage::disk('admin')->move($uniqueId, $filePath);
+        $link = Storage::disk('admin')->url($filePath);
+
+
+        $data = ['link' => $link];
 
         return json_encode($data);
-
     }
 }

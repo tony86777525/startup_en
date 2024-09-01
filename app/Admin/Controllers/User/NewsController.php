@@ -18,9 +18,9 @@ class NewsController extends AdminController
     protected $title = 'News';
 
     const ENABLED_SWITCH = [
-            'on'  => ['value' => 1, 'text' => '開', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => '關', 'color' => 'default'],
-        ];
+        'on'  => ['value' => 1, 'text' => '開', 'color' => 'success'],
+        'off' => ['value' => 0, 'text' => '關', 'color' => 'default'],
+    ];
 
     /**
      * Make a grid builder.
@@ -31,13 +31,21 @@ class NewsController extends AdminController
     {
         $grid = new Grid(new News());
 
-        $grid->model()->orderBy('art_date', 'DESC');
+        $grid->model()
+            ->orderBy('art_date', 'DESC')
+            ->orderBy('created_at', 'ASC');
 
         $grid->column('id', __('編號'));
         $grid->column('title', __('標題'));
         $grid->column('art_date', __('發布日期'));
         $grid->column('enabled', __('啟用'))->switch(self::ENABLED_SWITCH);
         $grid->column('created_at', __('建立時間'));
+
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+
+            $filter->like('title', __('標題'));
+        });
 
         $grid->actions(function($actions){
             $actions->disableView();
@@ -48,7 +56,7 @@ class NewsController extends AdminController
 //        $grid->disableCreateButton();
         $grid->disableExport();
         $grid->disableColumnSelector();
-        $grid->disablePagination();
+//        $grid->disablePagination();
 
 
         return $grid;
@@ -64,8 +72,6 @@ class NewsController extends AdminController
     {
         $show = new Show(News::findOrFail($id));
 
-
-
         return $show;
     }
 
@@ -78,30 +84,17 @@ class NewsController extends AdminController
     {
         $form = new Form(new News());
 
-        $form->image('pic', __('代表圖'));
+        $hash = sha1(now());
+        $path = substr($hash, 0, 3) . '/' . substr($hash, 3, 3) . '/' . substr($hash, 6, 3);
+
+        $form->image('pic', __('代表圖'))->name(function ($file) use ($hash) {
+            return $hash . '.' . $file->guessExtension();
+        })->move($path);
         $form->text('title', __('標題'));
-        $form->text('art_date', __('發佈日期'));
+        $form->date('art_date', __('發佈日期'));
         $form->text('tag', __('標籤'));
         $form->froalaEditor('content', __('內容'));
         $form->switch('enabled', '')->states(self::ENABLED_SWITCH);
-
-//        $form->email('email', __('E-mail'));
-//        $form->text('country', __('Country'));
-//        $form->text('recipient_name', __('Recipient Name'));
-//        $form->text('recipient_company_name', __('Recipient Company Name'));
-//        $form->text('recipient_address_nation', __('Recipient Address Nation'));
-//        $form->text('recipient_address_country', __('Recipient Address Country'));
-//        $form->text('recipient_address_code', __('Recipient Address Code'));
-//        $form->text('recipient_address', __('Recipient Address'));
-//        $form->text('recipient_tel', __('Recipient Tel'));
-//        $form->text('recipient_email', __('Recipient E-mail'));
-//        $form->text('google_drive_folder_id', __('Google Drive Folder Id'));
-
-//        $form->saving(function (Form $form) {
-//            if (!isset($form->model()->number)) {
-//                $form->number = OrderService::getNewNumber();
-//            }
-//        });
 
         $form->disableEditingCheck();
         $form->disableViewCheck();

@@ -9,6 +9,8 @@ class StoryController extends Controller
 {
     public function index()
     {
+//        $stories = Story::where('enabled', '=', 1)->paginate(5);
+
         $story = new Story();
 
         $story->id = 1;

@@ -39,7 +39,7 @@
                         <div class="col-sm-12 col-md-8 NewsWord">
                             <p class="NewsTitle"><a title="{{ $data->title }}" href="{{ route('user.news-content', ['news_id' => $data->id]) }}">{{ $data->title }}</a></p>
                             <div class="date">{{ $data->art_date }} | {{ $data->tag }}</div><br>
-                            <div class="NewsContent">{{ \Illuminate\Support\Str::of($data->content)->stripTags() }}</div>
+                            <div class="NewsContent">{{ \Illuminate\Support\Str::limit(\Illuminate\Support\Str::of($data->content)->stripTags(), 250) }}</div>
                             <button class="NewsButton"><a title="{{ $data->title }}" href="{{ route('user.news-content', ['news_id' => $data->id]) }}">More</a></button>
                         </div>
                     </div>

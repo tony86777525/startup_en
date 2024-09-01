@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
@@ -46,7 +47,7 @@ class News extends Model
      *
      * @var string
      */
-    protected $dateFormat = 'U';
+//    protected $dateFormat = 'U';
 
     /*
      * created_at
@@ -74,9 +75,6 @@ class News extends Model
 
     public function getCreatedAtAttribute($value)
     {
-//        $d = new \DateTime();
-//        $d->setTime(0,0, 0, strtotime($value));
-//        return $d->format('Y-m-d H:i:s');
         $week = array(
             "0" => "星期日",
             "1" => "星期一",
@@ -92,13 +90,8 @@ class News extends Model
         return date("Y年m月d日$w H:i", strtotime($value));
     }
 
-    public function getStatusAttribute()
-    {
-        return $this->enabled === 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>';
-    }
-
     public function getImageAttribute()
     {
-        return '/uploads/66c6096a6e189730691728.jpg';
+        return Storage::disk('admin')->url($this->pic);
     }
 }
