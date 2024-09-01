@@ -8,9 +8,20 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $news = News::where('enabled', '=', 1)
+        $page = $request->get('page');
+        $q = $request->get('q');
+
+        $query = new News();
+
+        if (isset($q) && $q !== '') {
+            $query = $query->where('title', 'like', "%$q%");
+        }
+
+        $news = $query
+            ->where('enabled', '=', 1)
             ->orderBy('art_date', 'DESC')
             ->orderBy('created_at', 'ASC')
             ->paginate(5);
@@ -32,7 +43,7 @@ class NewsController extends Controller
 //            $news
 //        ]);
 
-        return view('user.news', compact('news'));
+        return view('user.news', compact('news', 'q', 'page'));
     }
 
     public function detail($news_id)

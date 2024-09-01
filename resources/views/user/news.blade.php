@@ -25,7 +25,7 @@
         <section id="NewsPage" class="container mb-5">
             <div class="sc-box">
                 <form action="{{ route('user.news') }}" method="get">
-                    <input type="text" class="sc-input" placeholder="Search ..." name="q" value="">
+                    <input type="text" class="sc-input" placeholder="Search ..." name="q" value="{{ $q }}">
                     <input type="submit" class="sc-submit" value="Search">
                 </form>
             </div>
@@ -49,19 +49,7 @@
                 <h3 class='mt-4'>No Results Found</h3><div>The page you requested could not be found. Try refining your search, or use the navigation above to locate the post.</div>
             @endif
 
-            @if ($news->count() > 0)
-                <div class="page">
-                    @if(true)
-                        <a href="" class="navi-paging left"><img src="{{ url('assets/img/arrowleft.png') }}"></a>
-                    @endif
-
-                    <p class="pagenumber">{{  1  }}</p>
-
-                    @if(true)
-                        <a href="" class="navi-paging right"><img src="{{ url('assets/img/arrowright.png') }}"></a>
-                    @endif
-                </div>
-            @endif
+            {{ $news->links('user.basic.pagination', ['routeName' => 'user.news', 'q' => $q]) }}
         </section>
     </section>
 @endsection
