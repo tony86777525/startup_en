@@ -58,7 +58,6 @@ class NewsController extends AdminController
         $grid->disableColumnSelector();
 //        $grid->disablePagination();
 
-
         return $grid;
     }
 

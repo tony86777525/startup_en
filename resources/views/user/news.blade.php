@@ -25,7 +25,7 @@
         <section id="NewsPage" class="container mb-5">
             <div class="sc-box">
                 <form action="{{ route('user.news') }}" method="get">
-                    <input type="text" class="sc-input" placeholder="Search ..." name="q" value="{{ $q }}">
+                    <input type="text" class="sc-input" placeholder="Search ..." name="q" value="">
                     <input type="submit" class="sc-submit" value="Search">
                 </form>
             </div>

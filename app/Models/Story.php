@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Story extends Model
 {
@@ -91,6 +92,6 @@ class Story extends Model
 
     public function getImageAttribute()
     {
-        return '/uploads/66c6096a6e189730691728.jpg';
+        return Storage::disk('admin')->url($this->pic);
     }
 }

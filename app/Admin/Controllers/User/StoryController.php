@@ -31,12 +31,13 @@ class StoryController extends AdminController
     {
         $grid = new Grid(new Story());
 
-        $grid->model()->orderBy('art_date', 'DESC');
+        $grid->model()
+            ->orderBy('art_date', 'DESC')
+            ->orderBy('created_at', 'ASC');
 
         $grid->column('id', __('編號'));
         $grid->column('title', __('標題'));
         $grid->column('art_date', __('發布日期'));
-
         $grid->column('enabled', __('啟用'))->switch(self::ENABLED_SWITCH);
         $grid->column('created_at', __('建立時間'));
 
@@ -70,17 +71,6 @@ class StoryController extends AdminController
     {
         $show = new Show(Story::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('art_date', __('Art date'));
-        $show->field('tag', __('Tag'));
-        $show->field('content', __('Content'));
-        $show->field('pic', __('Pic'));
-        $show->field('enabled', __('Enabled'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-        $show->field('deleted_at', __('Deleted at'));
-
         return $show;
     }
 
@@ -93,7 +83,12 @@ class StoryController extends AdminController
     {
         $form = new Form(new Story());
 
-        $form->image('pic', __('代表圖'));
+        $hash = sha1(now());
+        $path = substr($hash, 0, 3) . '/' . substr($hash, 3, 3) . '/' . substr($hash, 6, 3);
+
+        $form->image('pic', __('代表圖'))->name(function ($file) use ($hash) {
+            return $hash . '.' . $file->guessExtension();
+        })->move($path);
         $form->text('title', __('標題'));
         $form->text('art_date', __('發佈日期'));
         $form->text('tag', __('標籤'));

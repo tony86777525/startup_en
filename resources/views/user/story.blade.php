@@ -38,7 +38,7 @@
                         <div class="col-sm-12 col-md-8 NewsWord">
                             <p class="NewsTitle"><a title="{{ $data->title }}" href="{{ route('user.story-content', ['story_id' => $data->id]) }}">{{ $data->title }}</a></p>
                             <div class="date">{{ $data->art_date }} | {{ $data->tag }}</div><br>
-                            <div class="NewsContent">{{ \Illuminate\Support\Str::of($data->content)->stripTags() }}</div>
+                            <div class="NewsContent">{{ \Illuminate\Support\Str::limit(\Illuminate\Support\Str::of($data->content)->stripTags(), 250) }}</div>
                             <button class="NewsButton"><a title="{{ $data->title }}" href="{{ route('user.news-content', ['news_id' => $data->id]) }}">More</a></button>
                         </div>
                     </div>
@@ -49,19 +49,7 @@
                 <h3 class='mt-4'>No Results Found</h3><div>The page you requested could not be found. Try refining your search, or use the navigation above to locate the post.</div>
             @endif
 
-            @if ($stories->count() > 0)
-                <div class="page">
-                    @if(true)
-                        <a href="" class="navi-paging left"><img src="{{ url('assets/img/arrowleft.png') }}"></a>
-                    @endif
-
-                    <p class="pagenumber">{{  1  }}</p>
-
-                    @if(true)
-                        <a href="" class="navi-paging right"><img src="{{ url('assets/img/arrowright.png') }}"></a>
-                    @endif
-                </div>
-            @endif
+            {{ $stories->links('user.basic.pagination', ['routeName' => 'user.story', 'q' => $q]) }}
         </section>
     </section>
 @endsection

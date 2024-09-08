@@ -4,48 +4,40 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Story;
+use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-//        $stories = Story::where('enabled', '=', 1)->paginate(5);
+        $page = $request->get('page');
+        $q = $request->get('q');
 
-        $story = new Story();
+        $query = new Story();
 
-        $story->id = 1;
-        $story->title = 'DC_TEST_1';
-        $story->art_date = '2024-08-20';
-        $story->tag = 'active';
-        $story->content = '<h1>frwrf</h1>';
-        $story->pic = null;
-        $story->enabled = 1;
-        $story->created_at = '2024-08-21 23:43:31';
-        $story->updated_at = '2024-08-21 23:43:31';
-        $story->deleted_at = null;
+        if (isset($q) && $q !== '') {
+            $query = $query->where('title', 'like', "%$q%");
+        }
 
-        $stories = collect([
-            $story
-        ]);
+        $stories = $query
+            ->where('enabled', '=', 1)
+            ->orderBy('art_date', 'DESC')
+            ->orderBy('created_at', 'ASC')
+            ->paginate(5);
 
-        return view('user.story', compact('stories'));
+        return view('user.story', compact('stories', 'q', 'page'));
     }
 
 
-    public function detail()
+    public function detail($story_id)
     {
-        $story = new Story();
+        $story = Story::where('id', $story_id)
+            ->where('enabled', 1)
+            ->first();
 
-        $story->id = 1;
-        $story->title = 'DC_TEST_1';
-        $story->art_date = '2024-08-20';
-        $story->tag = 'active';
-        $story->content = '<h1>frwrf</h1>';
-        $story->pic = null;
-        $story->enabled = 1;
-        $story->created_at = '2024-08-21 23:43:31';
-        $story->updated_at = '2024-08-21 23:43:31';
-        $story->deleted_at = null;
+        if (empty($story)) {
+            abort(404);
+        }
 
         return view('user.story-content', compact('story'));
     }
