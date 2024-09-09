@@ -16,7 +16,7 @@
 @endPush
 
 @push('page_css')
-
+    @vite(['resources/assets/sass/user/index.scss'])
 @endPush
 
 @section('main')
@@ -25,7 +25,7 @@
         <div class="banner-overlay" style="width: 100%;height: 100%;position: absolute;z-index: 1;">
             <div class="overlay overlay-dark" style="background-color: rgba(0,0,0,.3);width: 100%;height: 100%;"></div>
         </div>
-        <div class="banner-image" style="background-image:url('{{ url('assets/img/bg_IA.jpg') }}');opacity:1;"></div>
+        <div class="banner-image" style="background-image:url('{{ url('assets/img/bg_ia.jpg') }}');opacity:1;"></div>
         <h1 class="banner-text">
             Incubator & Accelerator
         </h1>

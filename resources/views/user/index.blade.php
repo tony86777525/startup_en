@@ -16,7 +16,7 @@
 @endPush
 
 @push('page_css')
-@vite(['resources/assets/sass/user/index.scss'])
+    @vite(['resources/assets/sass/user/index.scss'])
 @endPush
 
 @section('main')
@@ -179,28 +179,25 @@
 
     <div id="carouselExampleControls" class="carousel slide mb-5" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4">
-                            <a href="{{ url('user.news-content', ['news_id' => 1]) }}"><img class="pic2" src="/uploads/66c6096a6e189730691728.jpg"></a>
-                            <p class="title5"><a href="{{ url('user.news-content', ['news_id' => 1]) }}">DC_TEST_1</a></p>
-                            <p class="title6">frwrf</p>
+            @if($news->isNotEmpty())
+                @foreach($news as $item)
+                    <div class="carousel-item @if($news->first() === $item) active @endif">
+                        <div class="container">
+                            <div class="row">
+                                @if($item->isNotEmpty())
+                                    @foreach($item as $data)
+                                        <div class="col-4">
+                                            <a href="{{ route('user.news-content', ['news_id' => $data->id]) }}"><img class="pic2" src="{{ $data->image }}"></a>
+                                            <p class="title5"><a href="{{ route('user.news-content', ['news_id' => $data->id]) }}">{{ \Illuminate\Support\Str::limit(\Illuminate\Support\Str::of($data->title)->stripTags(), 45) }}</a></p>
+                                            <p class="title6">{{ \Illuminate\Support\Str::limit(\Illuminate\Support\Str::of($data->content)->stripTags(), 100) }}</p>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4">
-                            <a href="{{ url('user.story-content', ['story_id' => 1]) }}"><img class="pic2" src="/uploads/66c6096a6e189730691728.jpg"></a>
-                            <p class="title5"><a href="{{ url('user.story-content', ['story_id' => 1]) }}">DC_TEST_1</a></p>
-                            <p class="title6">frwrf</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
             <a title="Previous" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" style="color: #212529">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only" style="color: #212529">Previous</span>

@@ -19,9 +19,8 @@ Route::group([
 ], function () {
 
 });
-Route::get('/', function () {
-    return view('user.index');
-})->name('user.index');
+Route::get('/', [\App\Http\Controllers\User\IndexController::class, 'index'])->name('user.index');
+
 
 Route::get('/permit', function () {
     return view('user.permit');

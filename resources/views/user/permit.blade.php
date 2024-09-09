@@ -16,7 +16,7 @@
 @endPush
 
 @push('page_css')
-
+    @vite(['resources/assets/sass/user/index.scss'])
 @endPush
 
 @section('main')
@@ -192,7 +192,7 @@
         </div>
         <h3 style="margin-top:25px;text-align:center;font: bold 1.7rem Arial;">Application Process</h3>
         <div class="mb-5" style="text-align:center">
-            <img alt="EGC-chart" src="{{ url('assets/img/EGC-chart.png') }}" style="width:80%" />
+            <img alt="EGC-chart" src="{{ url('assets/img/egc-chart.png') }}" style="width:80%" />
         </div>
         <div class="container mt-2 mb-5">
             <b class="mr-2">For More Information</b><br>

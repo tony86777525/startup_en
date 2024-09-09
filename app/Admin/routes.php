@@ -4,6 +4,7 @@ use Illuminate\Routing\Router;
 
 Admin::routes();
 
+
 Route::group([
     'prefix'        => config('admin.route.prefix'),
     'namespace'     => config('admin.route.namespace'),

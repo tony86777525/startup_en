@@ -16,7 +16,7 @@
 @endPush
 
 @push('page_css')
-
+    @vite(['resources/assets/sass/user/index.scss'])
 @endPush
 
 @section('main')

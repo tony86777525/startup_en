@@ -16,7 +16,7 @@
 @endPush
 
 @push('page_css')
-
+    @vite(['resources/assets/sass/user/index.scss'])
 @endPush
 
 @section('main')
@@ -107,10 +107,10 @@
         <div class="container" style="text-align: center">
             <h2 id="sbir" class="subtitle">Small Business Innovation Research (SBIR)</h2>
             <div class="row mt-5">
-                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR01" src="{{ url('assets/img/icon01_SBIR.png') }}" style="height:90px"></div>Developing a brand new idea, concept or new technology</div>
-                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR02" src="{{ url('assets/img/icon02_SBIR.png') }}" style="height:90px"></div>Applying an existing technology to a new application</div>
-                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR03" src="{{ url('assets/img/icon03_SBIR.png') }}" style="height:90px"></div>Applying a new technology or business model to an existing application</div>
-                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR04" src="{{ url('assets/img/icon04_SBIR.png') }}" style="height:90px"></div>Improving an existing technology or product</div>
+                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR01" src="{{ url('assets/img/icon01_sbir.png') }}" style="height:90px"></div>Developing a brand new idea, concept or new technology</div>
+                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR02" src="{{ url('assets/img/icon02_sbir.png') }}" style="height:90px"></div>Applying an existing technology to a new application</div>
+                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR03" src="{{ url('assets/img/icon03_sbir.png') }}" style="height:90px"></div>Applying a new technology or business model to an existing application</div>
+                <div class="col-lg-3 col-sm-6 SBIRtypes"><div class="mb-3"><img alt="SBIR04" src="{{ url('assets/img/icon04_sbir.png') }}" style="height:90px"></div>Improving an existing technology or product</div>
             </div>
         </div>
         <div class="SBIRtable-section">
